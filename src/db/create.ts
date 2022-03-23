@@ -1,14 +1,14 @@
 import { EntityManager } from "@mikro-orm/postgresql";
 import { Bar } from "../entities/bar.entity";
-import { Baz } from "../entities/baz.entity";
+import { BazEntity } from "../entities/baz.entity";
 import { FooEntity } from "../entities/foo.entity";
 import { RequestContext } from "@mikro-orm/core";
 import { init } from "./init";
 
 async function create(em: EntityManager) {
     const foo = new FooEntity([
-        new Bar("bar1", new Baz("baz1")),
-        new Bar("bar2", new Baz("baz2"))
+        new Bar("bar1", new BazEntity("baz1")),
+        new Bar("bar2", new BazEntity("baz2"))
     ]);
     em.persist(foo);
 }

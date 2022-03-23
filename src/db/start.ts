@@ -3,11 +3,12 @@ import { EntityManager } from "@mikro-orm/postgresql";
 import { FooEntity } from "../entities/foo.entity";
 import { init } from "./init";
 
-async function load(em: EntityManager) {
+async function load(em: EntityManager, populate: any) {
     const repo = em.getRepository(FooEntity);
     const [foo] = await repo.findAll({
-        populate: true
+        populate
     });
+    console.log(`--------------- populate: ${populate} ----------------------`)
     console.log("foo", foo);
     const [bar1, bar2] = foo.bar;
     console.log("bar1", bar1);
@@ -21,7 +22,8 @@ async function run() {
 
     try {
         await RequestContext.createAsync(orm.em, async () => {
-            await load(orm.em);
+            await load(orm.em, true);
+            await load(orm.em, ['_bar', '_bar.baz']);
             await orm.em.flush();
         });
     } finally {
