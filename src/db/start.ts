@@ -5,10 +5,15 @@ import { init } from "./init";
 
 async function load(em: EntityManager) {
     const repo = em.getRepository(FooEntity);
-    const foos = await repo.findAll({
+    const [foo] = await repo.findAll({
         populate: true
     });
-    console.log(JSON.stringify(foos));
+    console.log("foo", foo);
+    const [bar1, bar2] = foo.bar;
+    console.log("bar1", bar1);
+    console.log("bar2", bar2);
+    console.log("baz1", bar1.baz);
+    console.log("baz2", bar2.baz);
 }
 
 async function run() {
