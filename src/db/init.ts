@@ -1,5 +1,6 @@
 import { MikroORM } from "@mikro-orm/core";
 import { PostgreSqlDriver } from "@mikro-orm/postgresql";
+import { CustomNamingStrategy } from "./customNamingStrategy";
 
 export function init() {
     return MikroORM.init<PostgreSqlDriver>({
@@ -12,5 +13,6 @@ export function init() {
         user: "postgres",
         password: "test123",
         debug: true,
+        namingStrategy: CustomNamingStrategy
     });
 }

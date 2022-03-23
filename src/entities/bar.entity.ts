@@ -1,16 +1,16 @@
-import { Embeddable, ManyToOne, Property } from "@mikro-orm/core";
-import { BazEntity } from "./baz.entity";
+import { Embeddable, Embedded, Property } from "@mikro-orm/core";
+import { Fiz } from "./fiz.entity";
 
 @Embeddable()
 export class Bar {
-    constructor(name: string, baz: BazEntity) {
+    constructor(name: string, fiz: Fiz[]) {
         this.name = name;
-        this.baz = baz;
+        this._fiz = fiz;
     }
 
     @Property()
     public name: string;
 
-    @ManyToOne({ entity: () => BazEntity, eager: true })
-    public baz: BazEntity;
+    @Embedded(() => Fiz, { array: true })
+    public _fiz: Fiz[] = [];
 }
