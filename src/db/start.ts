@@ -6,15 +6,12 @@ import { init } from "./init";
 async function load(em: EntityManager, populate: any) {
     const repo = em.getRepository(FooEntity);
     const [foo] = await repo.findAll({
-        populate
+        populate: true
     });
     console.log(`--------------- populate: ${populate} ----------------------`)
-    console.log("foo", foo);
     const [bar1, bar2] = foo.bar;
     console.log("bar1", bar1);
     console.log("bar2", bar2);
-    console.log("baz1", bar1.baz);
-    console.log("baz2", bar2.baz);
 }
 
 async function run() {
@@ -22,8 +19,8 @@ async function run() {
 
     try {
         await RequestContext.createAsync(orm.em, async () => {
-            await load(orm.em, true);
-            await load(orm.em, ['_bar', '_bar.baz']);
+            await load(orm.em, true); // Does not work
+            await load(orm.em, ['bar', 'bar.baz']); // Works
             await orm.em.flush();
         });
     } finally {

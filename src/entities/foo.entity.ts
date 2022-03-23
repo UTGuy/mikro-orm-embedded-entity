@@ -6,16 +6,16 @@ import { Bar } from "./bar.entity";
 export class FooEntity {
     constructor(bar: Bar[]) {
         this.id = IdCreator.create();
-        this._bar = bar;
+        this.bar = bar;
     }
 
     @PrimaryKey()
     readonly id!: string;
 
     @Embedded(() => Bar, { array: true })
-    private _bar: Bar[] = [];
+    public bar: Bar[] = [];
 
-    public get bar() {
-        return [...(this._bar || [])];
-    }
+    // public get bar() {
+    //     return [...(this._bar || [])];
+    // }
 }

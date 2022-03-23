@@ -5,16 +5,12 @@ import { IdCreator } from "../idCreator";
 export class BazEntity {
     constructor(name: string) {
         this.id = IdCreator.create();
-        this._name = name;
+        this.name = name;
     }
 
     @PrimaryKey()
     readonly id!: string;
 
     @Property()
-    private _name: string;
-
-    get name() {
-        return this._name;
-    }
+    public name: string;
 }

@@ -11,10 +11,6 @@ export class Bar {
     @Property()
     public name: string;
 
-    @ManyToOne({ entity: () => BazEntity, eager: true, name: 'baz' })
+    @ManyToOne({ entity: () => BazEntity, eager: true })
     public baz: BazEntity;
-
-    // public get baz() {
-    //     return this._baz;
-    // }
 }
