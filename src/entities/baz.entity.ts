@@ -5,12 +5,16 @@ import { IdCreator } from "../idCreator";
 export class Baz {
     constructor(name: string) {
         this.id = IdCreator.create();
-        this.name = name;
+        this._name = name;
     }
 
     @PrimaryKey()
     readonly id!: string;
 
     @Property()
-    name: string;
+    private _name: string;
+
+    get name() {
+        return this._name;
+    }
 }

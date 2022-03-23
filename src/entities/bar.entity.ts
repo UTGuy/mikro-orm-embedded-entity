@@ -5,12 +5,16 @@ import { Baz } from "./baz.entity";
 export class Bar {
     constructor(name: string, baz: Baz) {
         this.name = name;
-        this.baz = baz;
+        this._baz = baz;
     }
 
     @Property()
     public name: string;
 
     @ManyToOne({ entity: () => Baz, eager: true })
-    public baz: Baz;
+    private _baz: Baz;
+
+    public get baz() {
+        return this._baz;
+    }
 }

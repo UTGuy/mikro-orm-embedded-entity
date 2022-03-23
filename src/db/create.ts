@@ -6,11 +6,10 @@ import { RequestContext } from "@mikro-orm/core";
 import { init } from "./init";
 
 async function create(em: EntityManager) {
-    const foo = new FooEntity();
-    foo.bar = [
+    const foo = new FooEntity([
         new Bar("bar1", new Baz("baz1")),
         new Bar("bar2", new Baz("baz2"))
-    ]
+    ]);
     em.persist(foo);
 }
 

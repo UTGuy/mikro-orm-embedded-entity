@@ -4,13 +4,18 @@ import { Bar } from "./bar.entity";
 
 @Entity()
 export class FooEntity {
-    constructor() {
+    constructor(bar: Bar[]) {
         this.id = IdCreator.create();
+        this._bar = bar;
     }
 
     @PrimaryKey()
     readonly id!: string;
 
     @Embedded(() => Bar, { array: true })
-    bar: Bar[] = [];
+    private _bar: Bar[] = [];
+
+    public get bar() {
+        return [...(this._bar || [])];
+    }
 }

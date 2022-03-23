@@ -7,7 +7,7 @@
     "clean": "rimraf node_modules",
     "prebuild": "rimraf dist",
     "build": "tsc",
-    "create": "node ./dist/db/create.js",
+    "data": "node ./dist/db/create.js",
     "start": "node ./dist/db/start.js"
   },
   "dependencies": {

@@ -5,7 +5,9 @@ import { init } from "./init";
 
 async function load(em: EntityManager) {
     const repo = em.getRepository(FooEntity);
-    const foos = await repo.findAll();
+    const foos = await repo.findAll({
+        populate: true
+    });
     console.log(JSON.stringify(foos));
 }
 
